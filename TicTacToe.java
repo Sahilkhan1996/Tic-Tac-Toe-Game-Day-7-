@@ -17,6 +17,8 @@ public class TicTacToe {
 		for (int index = 1; index < 10; index++) {
 			board[index] = ' ';
 		}
+		isWinner = false;
+
 	}
 
 	public static void getPlayerChoice() {
@@ -42,7 +44,7 @@ public class TicTacToe {
 	}
 
 	public static void userMove() {
-		
+
 		System.out.println("\nPlayer Is Playing");
 		System.out.println("\nEnter Location 1-9 to Make Move");
 
@@ -77,7 +79,7 @@ public class TicTacToe {
 		board[playLocation] = computer;
 		showBoard();
 	}
-	
+
 	public static void occupyCorner() {
 
 		int[] corners = { 1, 3, 7, 9 };
@@ -85,7 +87,6 @@ public class TicTacToe {
 		playLocation = corners[corner];
 	}
 
-	
 	public static boolean occupyCenter() {
 		if (board[1] != ' ' && board[3] != ' ' && board[7] != ' ' && board[9] != ' ') {
 			if (isEmpty(5)) {
@@ -107,7 +108,7 @@ public class TicTacToe {
 		}
 		return false;
 	}
-	
+
 	public static boolean predictWinLocationAndBlock() {
 		if (board[1] == computer && board[2] == computer && board[3] == ' ') {
 			playLocation = 3;
@@ -303,6 +304,7 @@ public class TicTacToe {
 		} else
 			return false;
 	}
+
 	public static boolean isEmpty(int location) {
 		return board[location] == ' ';
 
@@ -379,15 +381,24 @@ public class TicTacToe {
 			System.out.println("Board is FULL! Game TIED.");
 
 	}
-	
-	
+
 	public static void main(String[] args) {
 
 		System.out.println("----- Welcome To The Game Of Tic Tac Toe -----\n");
-		createBoard();
-		getPlayerChoice();
-		checkToss();
-		startGame();
+		boolean playMore = true;
+		while (playMore) {
+			createBoard();
+			getPlayerChoice();
+			showBoard();
+			checkToss();
+			startGame();
+			System.out.println("Press '1' to continue playing, '2' to exit");
+			int userInput = scannerObject.nextInt();
+			if (userInput == 2) {
+				System.out.println("Thank You for playing. BYE!");
+				System.exit(0);
+			}
+		}
 
 	}
 
