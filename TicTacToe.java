@@ -28,16 +28,22 @@ public class TicTacToe {
 		 System.out.println("Computer's choice is : " +computer);
 	}
 	
+	
 	public static void showBoard() {
+		System.out.println();
         System.out.println("  " + board[1] + "  |  " + board[2]  + "   | " + board[3] + "  ");
+        System.out.println("------------------");
         System.out.println("  " + board[4] + "  |  " + board[5]  + "   | " + board[6] + "  ");
+        System.out.println("------------------");
         System.out.println("  " + board[7] + "  |  " + board[8]  + "   | " + board[9] + "  ");
 	}
 	
+
 	public static void userMove() {
 		System.out.println("Enter Location 1-9 to Make Move");
 		playLocation = scannerObject.nextInt();
-		if (playLocation < 10 && playLocation > 0) {
+		scannerObject.nextLine();
+		if (isEmpty() && playLocation < 10 && playLocation > 0) {
 			board[playLocation] = player;
 			showBoard();
 		} else {
@@ -45,9 +51,17 @@ public class TicTacToe {
 		}
 	}
 	
+	public static boolean isEmpty() {
+		if (board[playLocation] == ' ') {
+			return true;
+		} else {
+			return false;
+		}
+	}
+		
 	public static void main(String[] args) {
 		
-		System.out.println("----- Welcome To The Game Of Tic Tac Toe -----");
+		System.out.println("----- Welcome To The Game Of Tic Tac Toe -----\n");
 		createBoard();
 		getPlayerChoice();
 		showBoard();
